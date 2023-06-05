@@ -15,33 +15,6 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class UsersController extends AbstractController
 {
-    #[Route('/', name : 'app_login')]
-    public function login()
-    {
-        return $this -> render('users/login.html.twig');
-    }
-
-    #[Route('/addUser', name: 'app_addUser')]
-    public function addUserPage()
-    {
-        return $this-> render('users/addUser.html.twig');
-    }
-
-    #[Route('/users', name : 'app_users')]
-    public function showUsers(){
-
-        $url = "http://localhost:8000/api/getUsers";
-        $json = file_get_contents($url);
-        $jo = json_decode($json);
-
-        return $this ->render('users/showUsers.html.twig', [
-            'users' => $jo
-        ]);
-    }
-
-
-
-
     #[Route('/api/getUsers', name: 'getAllUsers',methods : ['GET'])]
     public function getAllUsers(UsersRepository $usersRepository, SerializerInterface $serializer): JsonResponse
     {
@@ -78,4 +51,5 @@ class UsersController extends AbstractController
 
         return new JsonResponse($jsonUser, Response::HTTP_CREATED,['Location' => $location], true);
     }
+
 }
