@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
+#[ApiResource(formats: ['json' => ['application/json']])]
 
 class Users
 {
